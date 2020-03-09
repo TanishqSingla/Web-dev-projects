@@ -4,6 +4,7 @@ const bodyParser = require("body-parser");
 const app = express();
 
 app.set("view engine", "ejs");
+app.use(bodyParser.urlencoded({ extended: true }));
 
 app.get("/", (req, res) => {
   let today = new Date();
@@ -18,7 +19,16 @@ app.get("/", (req, res) => {
     "Saturday",
     "Sunday"
   ];
-  res.render("index", { day: day[currentDay] });
+
+  items = [];
+
+  res.render("index", { day: day[currentDay], newListItem: items });
+});
+
+app.post("/", function(req, res) {
+  let item = req.body.newItem;
+  items.push(item);
+  res.redirect("/");
 });
 
 app.listen("5000", () => {
