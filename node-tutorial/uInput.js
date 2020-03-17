@@ -1,6 +1,4 @@
 // This file shows how to get user input
-const chalk = require('chalk')
-
 const argument = process.argv[2];
 
 if(argument === 'add') {
