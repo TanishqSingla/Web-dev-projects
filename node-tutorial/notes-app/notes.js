@@ -1,5 +1,6 @@
 //! This file contains different methods for the app
 const fs = require("fs");
+const chalk = require("chalk");
 
 const getNotes = function() {
   return "Your Notes...";
@@ -20,9 +21,9 @@ const addNote = function(title, body) {
 
     saveNotes(notes);
 
-    console.log("New note added");
+    console.log(chalk.green.inverse("New note added"));
   } else {
-    console.log("Note already exist, please provide a different title");
+    console.log(chalk.red.inverse("Note title taken"));
   }
 };
 
@@ -32,7 +33,11 @@ const rmNote = function(title) {
     return note.title !== title;
   });
 
-  saveNotes(notesToKeep);
+  if (notes.length > notesToKeep.length) {
+    console.log(chalk.green.inverse("Note removed"));
+  } else {
+    console.log(chalk.red.inverse("No note found"));
+  }
 };
 
 const loadNote = function() {
