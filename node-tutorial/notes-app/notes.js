@@ -26,6 +26,15 @@ const addNote = function(title, body) {
   }
 };
 
+const rmNote = function(title) {
+  const notes = loadNote();
+  const notesToKeep = notes.filter(function(note) {
+    return note.title !== title;
+  });
+
+  saveNotes(notesToKeep);
+};
+
 const loadNote = function() {
   try {
     const dataBuffer = fs.readFileSync("notes.json");
@@ -44,5 +53,6 @@ const saveNotes = function(notes) {
 //? Exporting module
 module.exports = {
   addNote: addNote,
-  getNotes: getNotes
+  getNotes: getNotes,
+  rmNote: rmNote
 };
