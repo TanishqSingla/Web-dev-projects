@@ -1,6 +1,6 @@
-// This file shows user input through npm package yargs
+//! This is the notes app
 const yargs = require("yargs");
-
+const notes = require("./notes.js");
 yargs.version("0.0.1");
 
 yargs.command({
@@ -19,15 +19,22 @@ yargs.command({
     }
   },
   handler: function(argv) {
-    console.log(`Title: ${argv.title}\nBody: ${argv.body}`);
+    notes.addNote(argv.title, argv.body);
   }
 });
 
 yargs.command({
   command: "remove",
   describe: "Removes a new note",
-  handler: function() {
-    console.log("Removed a note");
+  builder: {
+    title: {
+      describe: 'used as --title=""',
+      demandOption: true,
+      type: "string"
+    }
+  },
+  handler: function(argv) {
+    console.log(`Removing ${argv.title}`);
   }
 });
 
