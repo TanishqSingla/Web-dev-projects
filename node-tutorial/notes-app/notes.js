@@ -9,7 +9,7 @@ const getNotes = function() {
 const addNote = function(title, body) {
   const notes = loadNote();
   const duplicate = notes.filter(function(note) {
-    note.title == title;
+    return note.title === title;
   });
 
   if (duplicate.length === 0) {
