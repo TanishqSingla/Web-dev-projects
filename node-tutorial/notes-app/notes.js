@@ -9,9 +9,7 @@ const getNotes = function() {
 //* addNote method for the app
 const addNote = function(title, body) {
   const notes = loadNote();
-  const duplicate = notes.filter(function(note) {
-    return note.title === title;
-  });
+  const duplicate = notes.filter(note => note.title === title);
 
   if (duplicate.length === 0) {
     notes.push({
@@ -29,9 +27,7 @@ const addNote = function(title, body) {
 
 const rmNote = function(title) {
   const notes = loadNote();
-  const notesToKeep = notes.filter(function(note) {
-    return note.title !== title;
-  });
+  const notesToKeep = notes.filter(note => note.title !== title);
 
   if (notes.length > notesToKeep.length) {
     console.log(chalk.green.inverse("Note removed"));
