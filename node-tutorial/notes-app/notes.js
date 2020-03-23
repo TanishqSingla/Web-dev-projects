@@ -40,8 +40,13 @@ const rmNote = title => {
 const listNote = () => {
   const notes = loadNote();
   console.log(chalk.greenBright.inverse("Your Notes"));
+  //? for in version (not good looking and a bit complex)
+  // for (let note in notes) {
+  //   console.log(notes[note].title);
+  // }
+  //? forEach version
   notes.forEach(note => {
-    console.log(chalk.blue(note.title));
+    console.log(note.title);
   });
 };
 
