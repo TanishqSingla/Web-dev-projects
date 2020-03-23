@@ -1,5 +1,5 @@
 const tasks = {
-  task: [
+  tasks: [
     {
       text: "Grocery Shopping",
       completed: true
@@ -14,7 +14,7 @@ const tasks = {
     }
   ],
   getTaskToDo() {
-    console.log("this is the function");
+    return this.tasks.filter(task => task.completed === false);
   }
 };
 
