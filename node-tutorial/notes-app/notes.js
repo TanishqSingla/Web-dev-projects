@@ -2,16 +2,13 @@
 const fs = require("fs");
 const chalk = require("chalk");
 
-const getNotes = () => {
-  return "Your Notes...";
-};
-
 //* addNote method for the app
 const addNote = (title, body) => {
   const notes = loadNote();
-  const duplicate = notes.filter(note => note.title === title);
+  //* .find method finds a match and then breaks the loop so it is more efficient then .filter method
+  const duplicate = notes.find(note => note.title === title);
 
-  if (duplicate.length === 0) {
+  if (!duplicate) {
     notes.push({
       title: title,
       body: body
@@ -44,10 +41,22 @@ const listNote = () => {
   // for (let note in notes) {
   //   console.log(notes[note].title);
   // }
-  //? forEach version
+  //? forEach version (directly gets the element and not number like in for..in loop)
   notes.forEach(note => {
     console.log(note.title);
   });
+};
+
+const readNote = title => {
+  const notes = loadNote();
+  const noteToRead = notes.find(note => note.title === title);
+
+  if (noteToRead) {
+    console.log(noteToRead.title);
+    console.log(noteToRead.body);
+  } else {
+    console.log(chalk.red.inverse("No note found"));
+  }
 };
 
 const loadNote = () => {
@@ -68,7 +77,7 @@ const saveNotes = notes => {
 //? Exporting module
 module.exports = {
   addNote: addNote,
-  getNotes: getNotes,
   rmNote: rmNote,
-  listNote: listNote
+  listNote: listNote,
+  readNote: readNote
 };
